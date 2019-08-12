@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeesModule } from './employees/employees.module';
 
-import { DataEmployeeService } from './employees/data-employee.service';
+import { DataEmployeeService } from './employees/services/data-employee.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DataEmployeeService } from './employees/data-employee.service';
     BrowserModule,
     EmployeesModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [DataEmployeeService],
   bootstrap: [AppComponent]

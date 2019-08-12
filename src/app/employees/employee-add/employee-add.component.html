@@ -1,1 +1,51 @@
-<p>employee-add works!</p>
+<form>
+    <div class="form-row">
+      <div class="col-md-2 mb-3">
+        <label for="validationDefaultUsername">Id</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"
+            id="inputGroupPrepend2">@</span>
+          </div>
+          <input type="number" class="form-control"
+          placeholder="Id"
+          [(ngModel)]="id" name="first">
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationDefault01">First name</label>
+        <input type="text" class="form-control"
+        placeholder="First name"
+        [(ngModel)]="firstName" name="first">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="validationDefault02">Last name</label>
+        <input type="text" class="form-control"
+        placeholder="Last name"
+        [(ngModel)]="lastName" name="first">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationDefault03">Position</label>
+        <input type="text" class="form-control"
+        placeholder="Position"
+        [(ngModel)]="position" name="first">
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationDefault04">Room</label>
+        <input type="number" class="form-control"
+        [(ngModel)]="room" name="first">
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationDefault05">Salary</label>
+        <input type="number" class="form-control"
+        [(ngModel)]="salary" name="first">
+      </div>
+    </div>
+    <button class="btn btn-primary"
+    type="button" (click)="add()">Add Employee</button>
+
+    <button type="button" class="btn btn-danger"
+    (click)="back()">Back</button>
+  </form>
