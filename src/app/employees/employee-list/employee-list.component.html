@@ -4,7 +4,7 @@
       <th scope="col">#</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
-      <th scope="col">Room Nb</th>
+      <th scope="col">Room</th>
       <th scope="col">Position</th>
       <th scope="col">Salary</th>
       <th scope="col">Edit</th>
@@ -20,11 +20,11 @@
       <td>{{ emp.position }}</td>
       <td>{{ emp.salary }}</td>
       <td>
-        <button type="button" class="btn btn-info"
+        <button type="button" class="btn btn-info btn-block"
         (click)="empEdit(emp)">Edit</button>
       </td>
       <td>
-        <button type="button" class="btn btn-danger"
+        <button type="button" class="btn btn-danger btn-block"
         (click)="empDelate(emp)">X</button>
       </td>
     </tr>

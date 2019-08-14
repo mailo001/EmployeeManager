@@ -60,5 +60,6 @@ export class DataEmployeeService {
   edit(empOld: Employee, empNew: Employee) {
     this.delate(empOld);
     this.add(empNew);
+    this.empListObs.next(this.empList);
   }
 }

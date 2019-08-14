@@ -13,25 +13,38 @@ export class EmployeeDetailComponent implements OnInit {
   empOld: Employee;
   empNew: Employee;
 
+  id: number ;
+  firstName = '';
+  lastName = '';
+  position = '';
+  room: number;
+  salary: number;
+
   constructor(
     private router: Router,
     private empService: DataEmployeeService,
     private route: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
+  ) {
     const id = this.route.snapshot.paramMap.get('id');
     this.empOld = this.empService.getEmployee(id);
     this.empNew = this.empOld;
   }
 
+  ngOnInit() {
+  }
+
   edit() {
     this.empService.edit(this.empOld, this.empNew);
     this.empOld = this.empNew;
+    this.back();
   }
 
   back() {
     this.router.navigate(['/employees']);
+  }
+
+  editId(event) {
+    this.empNew.id = event.target.value;
   }
 
 }

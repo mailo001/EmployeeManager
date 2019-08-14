@@ -1,4 +1,4 @@
-<form>
+<form class="needs-validation" novalidate>
     <div class="form-row">
       <div class="col-md-2 mb-3">
         <label for="validationDefaultUsername">Id</label>
@@ -9,7 +9,7 @@
           </div>
           <input type="number" class="form-control"
           placeholder="Id"
-          [(ngModel)]="id" name="first">
+          [(ngModel)]="id" name="id">
         </div>
       </div>
       <div class="col-md-4 mb-3">
@@ -22,7 +22,7 @@
         <label for="validationDefault02">Last name</label>
         <input type="text" class="form-control"
         placeholder="Last name"
-        [(ngModel)]="lastName" name="first">
+        [(ngModel)]="lastName" name="last">
       </div>
     </div>
     <div class="form-row">
@@ -30,22 +30,29 @@
         <label for="validationDefault03">Position</label>
         <input type="text" class="form-control"
         placeholder="Position"
-        [(ngModel)]="position" name="first">
+        [(ngModel)]="position" name="position">
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationDefault04">Room</label>
         <input type="number" class="form-control"
-        [(ngModel)]="room" name="first">
+        [(ngModel)]="room" name="room">
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationDefault05">Salary</label>
         <input type="number" class="form-control"
-        [(ngModel)]="salary" name="first">
+        [(ngModel)]="salary" name="salary">
       </div>
     </div>
-    <button class="btn btn-primary"
-    type="button" (click)="add()">Add Employee</button>
-
-    <button type="button" class="btn btn-danger"
-    (click)="back()">Back</button>
+    <div class="form-row">
+      <div class="col-md-4 mb-3"></div>
+      <div class="col-md-2 mb-3">
+        <button class="btn btn-success btn-block"
+        type="button" (click)="add()">Add</button>
+      </div>
+      <div class="col-md-2 mb-3">
+        <button type="button" class="btn btn-danger btn-block"
+        (click)="back()">Back</button>
+      </div>
+      <div class="col-md-4 mb-3"></div>
+    </div>
   </form>
