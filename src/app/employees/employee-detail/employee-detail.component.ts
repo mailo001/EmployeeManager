@@ -20,6 +20,10 @@ export class EmployeeDetailComponent implements OnInit {
   room: number;
   salary: number;
 
+  errtext = '';
+  err = true;
+  color = 'good';
+
   constructor(
     private router: Router,
     private empService: DataEmployeeService,
@@ -34,17 +38,18 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   edit() {
-    this.empService.edit(this.empOld, this.empNew);
-    this.empOld = this.empNew;
-    this.back();
+    try {
+      this.empService.edit(this.empOld, this.empNew);
+      this.empOld = this.empNew;
+      this.back();
+    } catch (e) {
+      this.color = 'bad';
+      this.errtext = e;
+      console.log(e);
+    }
   }
 
   back() {
     this.router.navigate(['/employees']);
   }
-
-  editId(event) {
-    this.empNew.id = event.target.value;
-  }
-
 }

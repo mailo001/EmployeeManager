@@ -7,18 +7,26 @@ import { AppComponent } from './app.component';
 import { EmployeesModule } from './employees/employees.module';
 
 import { DataEmployeeService } from './employees/services/data-employee.service';
+import { RoomModule } from './rooms/room.module';
+import { RoomService } from './rooms/services/room.service';
+import { NavybarComponent } from './navybar/navybar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavybarComponent
   ],
   imports: [
     BrowserModule,
+    RoomModule,
     EmployeesModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [DataEmployeeService],
+  providers: [
+    RoomService,
+    DataEmployeeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

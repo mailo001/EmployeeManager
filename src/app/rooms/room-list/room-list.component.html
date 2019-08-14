@@ -1,0 +1,34 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Load</th>
+      <th scope="col">Max Load</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of roomList">
+      <th scope="row">{{ room.nb }}</th>
+      <td>{{ room.name }}</td>
+      <td>{{ room.load }}</td>
+      <td>{{ room.maxLoad }}</td>
+      <td>
+        <button type="button" class="btn btn-info btn-block"
+        (click)="roomEdit(room)">Edit</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger btn-block"
+        (click)="roomDelete(room)">X</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <div>
+    <button type="button" class="btn btn-success" routerLink="/rooms/add">Add New Room</button>
+  </div>
+</div>

@@ -19,6 +19,9 @@ export class EmployeeAddComponent implements OnInit {
 
   // null: number;
 
+  errtext = '';
+  color = 'good';
+
   constructor(
     private router: Router,
     private empService: DataEmployeeService ) { }
@@ -27,23 +30,34 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   add() {
-    const empNew: Employee = {
-      id: this.id,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      position: this.position,
-      room: this.room,
-      salary: this.salary
-    };
 
-    this.empService.add(empNew);
+    try {
+      const empNew: Employee = {
+        id: this.id,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        position: this.position,
+        room: this.room,
+        salary: this.salary
+      };
 
-    this.id = null;
-    this.firstName = '';
-    this.lastName = '';
-    this.position = '';
-    this.room = null;
-    this.salary = null;
+      this.empService.add(empNew);
+
+      this.id = null;
+      this.firstName = '';
+      this.lastName = '';
+      this.position = '';
+      this.room = null;
+      this.salary = null;
+
+      this.color = 'good';
+      this.errtext = 'Success: Employee added!';
+
+    } catch (e) {
+      this.color = 'bad';
+      this.errtext = e;
+      console.log(e);
+    }
   }
 
   back() {

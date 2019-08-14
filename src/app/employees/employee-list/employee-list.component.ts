@@ -28,7 +28,7 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/employee', emp.id]);
   }
 
-  empDelate(emp: Employee) {
+  empDelete(emp: Employee) {
     this.empService.delate(emp);
   }
 
