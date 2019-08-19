@@ -25,4 +25,8 @@ export class NavybarComponent implements OnInit {
     this.router.navigate(['/rooms']);
   }
 
+  position() {
+    this.router.navigate(['/positions']);
+  }
+
 }

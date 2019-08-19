@@ -1,0 +1,33 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"># Name</th>
+        <th scope="col">Min Salary</th>
+        <th scope="col">Max Salary</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let position of positionList">
+        <th scope="row">{{ position.name }}</th>
+        <td>{{ position.minSalary }}</td>
+        <td>{{ position.maxSalary }}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-block"
+          (click)="positionEdit(position)">Edit</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-block"
+          (click)="positionDelete(position)">X</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <div>
+      <button type="button" class="btn btn-success" routerLink="/positions/add">Add New Position</button>
+    </div>
+  </div>
+

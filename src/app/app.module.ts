@@ -10,6 +10,8 @@ import { DataEmployeeService } from './employees/services/data-employee.service'
 import { RoomModule } from './rooms/room.module';
 import { RoomService } from './rooms/services/room.service';
 import { NavybarComponent } from './navybar/navybar.component';
+import { PositionModule } from './positions/position.module';
+import { PositionService } from './positions/services/position.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { NavybarComponent } from './navybar/navybar.component';
   ],
   imports: [
     BrowserModule,
+    PositionModule,
     RoomModule,
     EmployeesModule,
     AppRoutingModule,
@@ -25,6 +28,7 @@ import { NavybarComponent } from './navybar/navybar.component';
   ],
   providers: [
     RoomService,
+    PositionService,
     DataEmployeeService
   ],
   bootstrap: [AppComponent]
