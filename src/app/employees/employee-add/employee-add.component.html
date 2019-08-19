@@ -28,14 +28,17 @@
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label for="validationDefault03">Position</label>
-        <input type="text" class="form-control"
-        placeholder="Position"
+        <select class="form-control" id="exampleFormControlSelect1"
         [(ngModel)]="position" name="position">
+          <option *ngFor="let pos of posList">{{pos.name}}</option>
+        </select>
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationDefault04">Room</label>
-        <input type="number" class="form-control"
+        <select class="form-control" id="exampleFormControlSelect2"
         [(ngModel)]="room" name="room">
+          <option *ngFor="let room of roomListFree">{{room.nb}}</option>
+        </select>
       </div>
       <div class="col-md-3 mb-3">
         <label for="validationDefault05">Salary</label>

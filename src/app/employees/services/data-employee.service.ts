@@ -23,8 +23,16 @@ export class DataEmployeeService {
     return this.empListObs.asObservable();
   }
 
+  getFreeId(): number {
+    return this.empList.sort((e1, e2) => e2.id - e1.id)[0].id + 1;
+  }
+
   getEmployee(id: number | string): Employee {
     return this.empList.find(emp => emp.id === +id);
+  }
+
+  getEmpList(): Array<Employee> {
+    return this.empList;
   }
 
   checkId(emp: Employee): number {

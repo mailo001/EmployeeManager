@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee';
 import { Router } from '@angular/router';
 import { DataEmployeeService } from '../services/data-employee.service';
+import { PositionService } from 'src/app/positions/services/position.service';
+import { Position } from 'src/app/positions/models/position';
+import { Room } from 'src/app/rooms/models/room';
+import { RoomService } from 'src/app/rooms/services/room.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -22,16 +26,35 @@ export class EmployeeAddComponent implements OnInit {
   errtext = '';
   color = 'good';
 
+  posList: Array<Position>;
+  roomListFree: Array<Room>;
+
   constructor(
     private router: Router,
-    private empService: DataEmployeeService ) { }
+    private empService: DataEmployeeService,
+    private positionService: PositionService,
+    private roomService: RoomService
+  ) {
+    this.positionService.getPositionListObs().subscribe(pos => this.posList = pos);
+    this.roomService.getRoomListObs().subscribe(
+      (rooms): Array<Room> => this.roomListFree = rooms.filter(r => r.load < r.maxLoad));
+  }
 
   ngOnInit() {
+    this.id = this.empService.getFreeId();
   }
 
   add() {
 
     try {
+      const pos = this.posList.find(p => p.name === this.position);
+      if (pos.minSalary > this.salary || pos.maxSalary < this.salary) {
+        throw new Error('Wrong Salary! '
+        + pos.minSalary + ' <= Salary <= ' + pos.maxSalary);
+      }
+
+      this.roomService.addEmpToRoom(this.room);
+
       const empNew: Employee = {
         id: this.id,
         firstName: this.firstName,
@@ -43,7 +66,7 @@ export class EmployeeAddComponent implements OnInit {
 
       this.empService.add(empNew);
 
-      this.id = null;
+      this.id = this.empService.getFreeId();
       this.firstName = '';
       this.lastName = '';
       this.position = '';

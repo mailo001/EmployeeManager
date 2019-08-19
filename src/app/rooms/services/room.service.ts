@@ -45,4 +45,13 @@ export class RoomService {
     this.roomListObs.next(this.roomList);
     this.storage.set(STORAGE_KEY, this.roomList);
   }
+
+  addEmpToRoom(num: number) {
+    const room: Room = this.getRoom(num);
+    this.delate(room);
+    room.load += 1;
+    this.add(room);
+    this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
+  }
 }
