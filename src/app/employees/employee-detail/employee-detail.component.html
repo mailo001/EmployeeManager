@@ -9,20 +9,20 @@
         </div>
         <input type="number" class="form-control"
         placeholder="Id"
-        [(ngModel)]="empNew.id" name="id">
+        [(ngModel)]="id" name="id">
       </div>
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationDefault01">First name</label>
       <input type="text" class="form-control"
       placeholder="First name"
-      [(ngModel)]="empNew.firstName" name="first">
+      [(ngModel)]="firstName" name="first">
     </div>
     <div class="col-md-6 mb-3">
       <label for="validationDefault02">Last name</label>
       <input type="text" class="form-control"
       placeholder="Last name"
-      [(ngModel)]="empNew.lastName" name="last">
+      [(ngModel)]="lastName" name="last">
     </div>
   </div>
   <div class="form-row">
@@ -30,17 +30,17 @@
       <label for="validationDefault03">Position</label>
       <input type="text" class="form-control"
       placeholder="Position"
-      [(ngModel)]="empNew.position" name="position">
+      [(ngModel)]="position" name="position">
     </div>
     <div class="col-md-3 mb-3">
       <label for="validationDefault04">Room</label>
       <input type="number" class="form-control"
-      [(ngModel)]="empNew.room" name="room">
+      [(ngModel)]="room" name="room">
     </div>
     <div class="col-md-3 mb-3">
       <label for="validationDefault05">Salary</label>
       <input type="number" class="form-control"
-      [(ngModel)]="empNew.salary" name="salary">
+      [(ngModel)]="salary" name="salary">
     </div>
   </div>
   <div class="form-row">
@@ -63,3 +63,8 @@
       <div class="col-md-4 mb-3"></div>
     </div>
 </form>
+{{empNew.id}} {{empNew.firstName}}
+<div></div>
+{{empOld.id}} {{empOld.firstName}}
+<div></div>
+{{id}} {{firstName}}

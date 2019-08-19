@@ -47,7 +47,7 @@ export class DataEmployeeService {
 
   add(emp: Employee) {
     if (this.checkId(emp) !== 0) {
-      throw new Error('Wrong Id(add)');
+      throw new Error('Wrong Id!');
     }
     this.empList.push(emp);
     this.empListObs.next(this.empList);
@@ -59,7 +59,7 @@ export class DataEmployeeService {
   }
 
   edit(empOld: Employee, empNew: Employee) {
-    if (this.checkId(empNew)  === 1) {
+    if (this.checkId(empNew)  >= 1) {
       if (empNew.id !== empOld.id) {
         throw new Error('Wrong Id!');
       }

@@ -15,6 +15,7 @@ export class RoomEditComponent implements OnInit {
 
   num: number;
   name = '';
+  load: number;
   maxLoad: number;
 
   constructor(
@@ -25,13 +26,24 @@ export class RoomEditComponent implements OnInit {
     const nb = this.route.snapshot.paramMap.get('nb');
     this.roomOld = this.roomService.getRoom(nb);
     this.roomNew = this.roomOld;
+
+    this.num = this.roomOld.nb;
+    this.name = this.roomOld.name;
+    this.load = this.roomOld.load;
+    this.maxLoad = this.roomOld.maxLoad;
   }
 
   ngOnInit() {
   }
 
   edit() {
-    this.roomService.edit(this.roomOld, this.roomNew);
+    const roomCon: Room = {
+      nb: this.num,
+      name: this.name,
+      load: this.load,
+      maxLoad: this.maxLoad
+    };
+    this.roomService.edit(this.roomOld, roomCon);
     this.roomOld = this.roomNew;
     this.back();
   }

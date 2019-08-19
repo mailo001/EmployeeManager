@@ -9,20 +9,26 @@
           </div>
           <input type="number" class="form-control"
           placeholder="Nb"
-          [(ngModel)]="roomNew.nb" name="numer">
+          [(ngModel)]="num" name="numer">
         </div>
       </div>
       <div class="col-md-8 mb-3">
         <label for="validationDefault01">Name</label>
         <input type="text" class="form-control"
         placeholder="Name"
-        [(ngModel)]="roomNew.name" name="name">
+        [(ngModel)]="name" name="name">
       </div>
+    </div>
+    <div class="form-row">
       <div class="col-md-4 mb-3">
+        <label for="validationDefault02">Load</label>
+        <input type="text" class="form-control" [value]="load" readonly>
+      </div>
+      <div class="col-md-6 mb-3">
         <label for="validationDefault02">Max Load</label>
-        <input type="text" class="form-control"
+        <input type="number" class="form-control"
         placeholder="max"
-        [(ngModel)]="roomNew.maxLoad" name="maxLoad">
+        [(ngModel)]="maxLoad" name="maxLoad">
       </div>
     </div>
     <div class="form-row">

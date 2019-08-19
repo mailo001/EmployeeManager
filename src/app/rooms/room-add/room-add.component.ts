@@ -25,12 +25,12 @@ export class RoomAddComponent implements OnInit {
   }
 
   add() {
-    let room: Room = {
+    const room: Room = {
       nb: this.num,
       name:  this.name,
       load: 0,
       maxLoad: this.maxLoad
-    }
+    };
 
     this.roomService.add(room);
 

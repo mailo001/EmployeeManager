@@ -30,8 +30,17 @@ export class EmployeeDetailComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     const id = this.route.snapshot.paramMap.get('id');
+
     this.empOld = this.empService.getEmployee(id);
-    this.empNew = this.empOld;
+    this.empNew = this.empService.getEmployee(id);
+
+    this.id = this.empOld.id;
+    this.firstName = this.empOld.firstName;
+    this.lastName = this.empOld.lastName;
+    this.position = this.empOld.position;
+    this.room = this.empOld.room;
+    this.salary = this.empOld.salary;
+    console.log('con');
   }
 
   ngOnInit() {
@@ -39,13 +48,21 @@ export class EmployeeDetailComponent implements OnInit {
 
   edit() {
     try {
-      this.empService.edit(this.empOld, this.empNew);
+      const empCon: Employee = {
+        id: this.id,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        position: this.position,
+        room: this.room,
+        salary: this.salary
+      };
+
+      this.empService.edit(this.empOld, empCon);
       this.empOld = this.empNew;
       this.back();
     } catch (e) {
       this.color = 'bad';
       this.errtext = e;
-      console.log(e);
     }
   }
 
