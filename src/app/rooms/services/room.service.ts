@@ -1,31 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Room } from '../models/room';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
+const STORAGE_KEY = 'local_room';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
 
-  private roomList: Array<Room> = [
-    {
-      nb: 3,
-      name: 'Z komputerami',
-      load: 1,
-      maxLoad: 15
-    },
-    {
-      nb: 15,
-      name: 'Socialny',
-      load: 1,
-      maxLoad: 5
-    }
-  ];
+  private roomList: Array<Room> = [];
 
   private roomListObs = new BehaviorSubject<Array<Room>>([]);
 
-  constructor() {
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
+    this.roomList = this.storage.get(STORAGE_KEY) || [];
     this.roomListObs.next(this.roomList);
   }
 
@@ -40,16 +30,19 @@ export class RoomService {
   add(room: Room) {
     this.roomList.push(room);
     this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
   }
 
   delate(room: Room) {
     this.roomList = this.roomList.filter(r => r !== room);
     this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
   }
 
   edit(roomOld: Room, roomNew: Room) {
     this.delate(roomOld);
     this.add(roomNew);
     this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
   }
 }

@@ -1,35 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Employee } from '../models/employee';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
+const STORAGE_KEY = 'local_employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataEmployeeService {
 
-  private empList: Array<Employee> = [
-    {
-      id: 1,
-      firstName: 'Jas',
-      lastName: 'Kowalski',
-      position: 'Programista',
-      room: 3,
-      salary: 5000
-    },
-    {
-      id: 2,
-      firstName: 'Adam',
-      lastName: 'Nowak',
-      position: 'Pracownik Socjalny',
-      room: 15,
-      salary: 2000
-    },
-  ];
+  private empList: Array<Employee> = [];
 
   private empListObs = new BehaviorSubject<Array<Employee>>([]);
 
-  constructor() {
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
+    this.empList = this.storage.get(STORAGE_KEY) || [];
     this.empListObs.next(this.empList);
   }
 
@@ -51,11 +37,13 @@ export class DataEmployeeService {
     }
     this.empList.push(emp);
     this.empListObs.next(this.empList);
+    this.storage.set(STORAGE_KEY, this.empList);
   }
 
   delate(emp: Employee) {
     this.empList = this.empList.filter(e => e !== emp);
     this.empListObs.next(this.empList);
+    this.storage.set(STORAGE_KEY, this.empList);
   }
 
   edit(empOld: Employee, empNew: Employee) {
@@ -67,5 +55,6 @@ export class DataEmployeeService {
     this.delate(empOld);
     this.add(empNew);
     this.empListObs.next(this.empList);
+    this.storage.set(STORAGE_KEY, this.empList);
   }
 }

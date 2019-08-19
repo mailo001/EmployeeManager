@@ -13,6 +13,8 @@ import { NavybarComponent } from './navybar/navybar.component';
 import { PositionModule } from './positions/position.module';
 import { PositionService } from './positions/services/position.service';
 
+import { StorageServiceModule } from 'ngx-webstorage-service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,8 @@ import { PositionService } from './positions/services/position.service';
   ],
   imports: [
     BrowserModule,
+    // tslint:disable-next-line: deprecation
+    StorageServiceModule,
     PositionModule,
     RoomModule,
     EmployeesModule,
