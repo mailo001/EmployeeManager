@@ -53,8 +53,6 @@ export class EmployeeAddComponent implements OnInit {
         + pos.minSalary + ' <= Salary <= ' + pos.maxSalary);
       }
 
-      this.roomService.addEmpToRoom(this.room);
-
       const empNew: Employee = {
         id: this.id,
         firstName: this.firstName,
@@ -65,6 +63,8 @@ export class EmployeeAddComponent implements OnInit {
       };
 
       this.empService.add(empNew);
+
+      this.roomService.addEmpToRoom(this.room);
 
       this.id = this.empService.getFreeId();
       this.firstName = '';

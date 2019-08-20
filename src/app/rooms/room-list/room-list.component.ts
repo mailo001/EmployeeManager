@@ -12,6 +12,8 @@ export class RoomListComponent implements OnInit {
 
   roomList: Array<Room> = [ ];
 
+  err = '';
+
   constructor(
       private roomService: RoomService,
       private router: Router
@@ -28,6 +30,13 @@ export class RoomListComponent implements OnInit {
   }
 
   roomDelete(room: Room) {
-    this.roomService.delate(room);
+    try {
+      if ( room.load > 0) {
+        throw new Error('Room is not empty');
+      }
+      this.roomService.delate(room);
+    } catch (e) {
+      this.err = e;
+    }
   }
 }

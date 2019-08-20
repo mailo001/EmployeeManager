@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee';
 import { DataEmployeeService } from '../services/data-employee.service';
 import { Router } from '@angular/router';
+import { RoomService } from 'src/app/rooms/services/room.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -14,7 +15,8 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(
     private empService: DataEmployeeService,
-    private router: Router,
+    private roomService: RoomService,
+    private router: Router
   ) {
     this.empService.getEmpListObs().subscribe(
       (emps: Array<Employee>) => {this.empList = emps; }
@@ -29,6 +31,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   empDelete(emp: Employee) {
+    this.roomService.delateEmpOfRoom(emp.room);
     this.empService.delate(emp);
   }
 

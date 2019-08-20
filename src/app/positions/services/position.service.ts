@@ -15,7 +15,24 @@ export class PositionService {
   private positionListObs = new BehaviorSubject<Array<Position>>([]);
 
   constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    this.positionList = this.storage.get(STORAGE_KEY) || [];
+    this.positionList = this.storage.get(STORAGE_KEY) || [
+      {
+        name: 'Dyrektor',
+        minSalary: 10000,
+        maxSalary: 20000
+      },
+      {
+        name: 'Programista',
+        minSalary: 5000,
+        maxSalary: 10000
+      },
+      {
+        name: 'Tester',
+        minSalary: 3000,
+        maxSalary: 6000
+      }
+    ];
+    this.storage.set(STORAGE_KEY, this.positionList);
     this.positionListObs.next(this.positionList);
   }
 

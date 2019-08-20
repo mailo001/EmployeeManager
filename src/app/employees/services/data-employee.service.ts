@@ -15,7 +15,33 @@ export class DataEmployeeService {
   private empListObs = new BehaviorSubject<Array<Employee>>([]);
 
   constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    this.empList = this.storage.get(STORAGE_KEY) || [];
+    this.empList = this.storage.get(STORAGE_KEY) || [
+      {
+        id: 0,
+        firstName: 'Olaf',
+        lastName: 'Burak',
+        room: 2,
+        position: 'Dyrektor',
+        salary: 15000
+      },
+      {
+        id: 1,
+        firstName: 'Jan',
+        lastName: 'Kowalski',
+        room: 10,
+        position: 'Programista',
+        salary: 6000
+      },
+      {
+        id: 2,
+        firstName: 'Jakub',
+        lastName: 'Nowak',
+        room: 11,
+        position: 'Tester',
+        salary: 4000
+      }
+    ];
+    this.storage.set(STORAGE_KEY, this.empList);
     this.empListObs.next(this.empList);
   }
 
@@ -25,6 +51,13 @@ export class DataEmployeeService {
 
   getFreeId(): number {
     return this.empList.sort((e1, e2) => e2.id - e1.id)[0].id + 1;
+  }
+
+  isPosFree(pos: string): any {
+    if (this.empList.filter(e => e.position === pos).length === 0) {
+      return true;
+    }
+    return false;
   }
 
   getEmployee(id: number | string): Employee {

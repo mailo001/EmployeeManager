@@ -15,7 +15,7 @@
         <td>{{ position.maxSalary }}</td>
         <td>
           <button type="button" class="btn btn-info btn-block"
-          (click)="positionEdit(position)">Edit</button>
+          (click)="positionEdit(position)" disabled>Edit</button>
         </td>
         <td>
           <button type="button" class="btn btn-danger btn-block"
@@ -29,5 +29,9 @@
     <div>
       <button type="button" class="btn btn-success" routerLink="/positions/add">Add New Position</button>
     </div>
+  </div>
+
+  <div>
+      {{err}}
   </div>
 

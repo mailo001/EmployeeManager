@@ -15,7 +15,27 @@ export class RoomService {
   private roomListObs = new BehaviorSubject<Array<Room>>([]);
 
   constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    this.roomList = this.storage.get(STORAGE_KEY) || [];
+    this.roomList = this.storage.get(STORAGE_KEY) || [
+      {
+        nb: 2,
+        name: 'Gabinet Dyrektora',
+        load: 1,
+        maxLoad: 1
+      },
+      {
+        nb: 10,
+        name: 'Sala Komputerowa',
+        load: 1,
+        maxLoad: 10
+      },
+      {
+        nb: 11,
+        name: 'Sala Komputerowa',
+        load: 1,
+        maxLoad: 10
+      }
+    ];
+    this.storage.set(STORAGE_KEY, this.roomList);
     this.roomListObs.next(this.roomList);
   }
 
@@ -50,6 +70,15 @@ export class RoomService {
     const room: Room = this.getRoom(num);
     this.delate(room);
     room.load += 1;
+    this.add(room);
+    this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
+  }
+
+  delateEmpOfRoom(num: number) {
+    const room: Room = this.getRoom(num);
+    this.delate(room);
+    room.load -= 1;
     this.add(room);
     this.roomListObs.next(this.roomList);
     this.storage.set(STORAGE_KEY, this.roomList);
