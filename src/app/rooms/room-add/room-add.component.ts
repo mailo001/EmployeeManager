@@ -37,6 +37,8 @@ export class RoomAddComponent implements OnInit {
     this.num = this.null;
     this.name = '';
     this.maxLoad = this.null;
+
+    this.router.navigate(['/rooms/add/create']);
   }
 
   back() {

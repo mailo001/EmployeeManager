@@ -1,0 +1,14 @@
+<svg width="400" height="300">
+  <rect x="0" y="0" width="400" height="300" stroke="black"
+  fill="transparent" stroke-width="10" (mouseup)="unclick($event)"/>
+
+  <rect id="0" [attr.x]="pos[0].x" [attr.y]="pos[0].y"
+  [attr.width]="width" [attr.height]="height"
+  fill="red" (mousedown)="clik($event)"
+  (mousemove)="move($event)" (mouseup)="unclick($event)"/>
+
+  <rect id="1" [attr.x]="pos[1].x" [attr.y]="pos[1].y"
+  [attr.width]="width" [attr.height]="height"
+  fill="green" (mousedown)="clik($event)"
+  (mousemove)="move($event)" (mouseup)="unclick($event)"/>
+</svg>
