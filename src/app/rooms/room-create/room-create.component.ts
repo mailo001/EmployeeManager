@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Desk } from '../models/desk';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Desk, WidthDesk, HeightDesk } from '../models/desk';
+import { RoomAddService } from '../services/room-add.service';
+import { Room } from '../models/room';
 
 @Component({
   selector: 'app-room-create',
@@ -16,11 +18,13 @@ export class RoomCreateComponent implements OnInit {
   widthWindow = 700;
   heightWindow = this.widthWindow * this.heightRoom / this.widthRoom;
 
-  desks: Array<Desk> = [{ id: 0, x: 10, y: 10, rotate: 0, employee: true, empId: 0},
-    { id: 1, x: 10, y: 200, rotate: 90, employee: false}];
+  desks: Array<Desk> = [
+    { id: 0, x: 10, y: 10, rotate: 0, colision: false, employee: true, empId: 0},
+    { id: 1, x: 10, y: 200, rotate: 90, colision: false, employee: false}
+  ];
 
-  widthDesk = 100;
-  heightDesk = 100;
+  widthDesk = WidthDesk;
+  heightDesk = HeightDesk;
 
   id: number;
   isclick = false;
@@ -29,17 +33,36 @@ export class RoomCreateComponent implements OnInit {
   lastX: number;
   lastY: number;
 
-  constructor() { }
+  colision = false;
+
+  constructor(private roomAddService: RoomAddService) {
+    this.roomAddService.getRoomObs().subscribe((room: Room) => {
+      this.widthRoom = room.width;
+      this.heightRoom = room.height;
+      this.desks = room.desks;
+    });
+
+    this.viewBox = '0 0 ' + this.widthRoom.toString() + ' ' + this.heightRoom.toString();
+
+    this.widthWindow = 700;
+    this.heightWindow = this.widthWindow * this.heightRoom / this.widthRoom;
+  }
 
   ngOnInit() {
   }
 
-  visibilyty(desk: Desk) {
-    if (desk.employee) {
-      return 'visible';
+  @HostListener('document:keypress', ['$event'])
+  keypressCol(event: KeyboardEvent) {
+    if (event.key === 'z') {
+      this.colision = true;
     }
-    return 'hidden';
+  }
 
+  @HostListener('document:keyup', ['$event'])
+  keyupNoCol(event: KeyboardEvent) {
+    if (event.key === 'z') {
+      this.colision = false;
+    }
   }
 
   rotate(id: number) {
@@ -49,9 +72,8 @@ export class RoomCreateComponent implements OnInit {
     }
   }
 
-  clik(event: MouseEvent) {
-    // tslint:disable-next-line: deprecation
-    this.id = +event.toElement.id;
+  clik(event: MouseEvent, id: number) {
+    this.id = id;
     this.isclick = true;
     this.mouseX = event.offsetX;
     this.mouseY = event.offsetY;
@@ -79,24 +101,35 @@ export class RoomCreateComponent implements OnInit {
       ) {
         let c = 0;
         this.desks.forEach(desk => {
-          if (
-            desk.x <= this.desks[this.id].x + this.widthDesk
-            + event.movementX * this.widthRoom / this.widthWindow
-            &&
-            this.desks[this.id].x + event.movementX * this.widthRoom / this.widthWindow
-            <= desk.x + this.widthDesk
-            &&
-            desk.y <= this.desks[this.id].y + this.heightDesk
-            + event.movementY * this.heightRoom / this.heightWindow
-            &&
-            this.desks[this.id].y + event.movementY * this.heightRoom / this.heightWindow
-            <= desk.y + this.heightDesk
-          ) {
-            c++;
+          if (desk.id !== this.id) {
+            if (
+              desk.x <= this.desks[this.id].x + this.widthDesk
+              + event.movementX * this.widthRoom / this.widthWindow
+              &&
+              this.desks[this.id].x + event.movementX * this.widthRoom / this.widthWindow
+              <= desk.x + this.widthDesk
+              &&
+              desk.y <= this.desks[this.id].y + this.heightDesk
+              + event.movementY * this.heightRoom / this.heightWindow
+              &&
+              this.desks[this.id].y + event.movementY * this.heightRoom / this.heightWindow
+              <= desk.y + this.heightDesk
+            ) {
+              if (this.colision === true) {
+                desk.colision = true;
+                this.desks[this.id].colision = true;
+              }
+              c++;
+            } else {
+              desk.colision = false;
+            }
           }
         });
 
-        if (c === 1) {
+        if (c === 0 || this.colision === true) {
+          if (c === 0) {
+            this.desks[this.id].colision = false;
+          }
           this.desks[this.id].x += event.movementX * this.widthRoom / this.widthWindow;
           this.desks[this.id].y += event.movementY * this.heightRoom / this.heightWindow;
         }
@@ -107,6 +140,7 @@ export class RoomCreateComponent implements OnInit {
   unclick(event: MouseEvent) {
     this.id = null;
     this.isclick = false;
+    this.roomAddService.uppdateDesks(this.desks);
   }
 
 }

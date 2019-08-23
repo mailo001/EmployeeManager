@@ -12,7 +12,7 @@
           [(ngModel)]="num" name="numer">
         </div>
       </div>
-      <div class="col-md-8 mb-3">
+      <div class="col-md-10 mb-3">
         <label for="validationDefault01">Name</label>
         <input type="text" class="form-control"
         placeholder="Name"
@@ -21,9 +21,18 @@
     </div>
     <div class="form-row">
       <div class="col-md-4 mb-3">
+        <label for="validationDefault02">Weidth</label>
+        <input type="number" class="form-control" placeholder="width"
+        [(ngModel)]="width" name="width">
+      </div>
+      <div class="col-md-4 mb-3">
+          <label for="validationDefault02">Lenght</label>
+          <input type="number" class="form-control" placeholder="lenght"
+          [(ngModel)]="lenght" name="lenght">
+        </div>
+      <div class="col-md-4 mb-3">
         <label for="validationDefault02">Max Load</label>
-        <input type="number" class="form-control"
-        placeholder="max"
+        <input type="number" class="form-control" placeholder="max"
         [(ngModel)]="maxLoad" name="maxLoad">
       </div>
     </div>
@@ -31,7 +40,7 @@
       <div class="col-md-4 mb-3"></div>
       <div class="col-md-2 mb-3">
         <button class="btn btn-success btn-block"
-        type="button" (click)="add()">Add</button>
+        type="button" (click)="next()">Next</button>
       </div>
       <div class="col-md-2 mb-3">
         <button type="button" class="btn btn-danger btn-block"

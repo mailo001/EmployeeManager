@@ -5,7 +5,7 @@
   stroke="#BDBDBD" fill="#F0F0F0" [attr.stroke-width]="wall"
   (mousemove)="move($event)" (mouseup)="unclick($event)"/>
 
-  <g *ngFor="let desk of desks" (mousedown)="clik($event)"
+  <g *ngFor="let desk of desks" (mousedown)="clik($event, desk.id)"
   (mousemove)="move($event)" (mouseup)="unclick($event)"
   (dblclick)="rotate(desk.id)"
   [attr.transform]="'rotate(' + desk.rotate.toString()
@@ -14,7 +14,7 @@
 
     <rect [id]="desk.id" [attr.x]="desk.x" [attr.y]="desk.y"
     [attr.width]="widthDesk" [attr.height]="heightDesk"
-    fill="#F8F7F3"/>
+    [attr.fill]="desk.colision ? '#ff6666' : '#F8F7F3'"/>
 
     <rect [id]="desk.id" [attr.x]="desk.x + widthDesk * 0.25"
     [attr.y]="desk.y + heightDesk * 0.35"
@@ -23,6 +23,7 @@
 
     <rect [id]="desk.id" [attr.x]="desk.x" [attr.y]="desk.y"
     [attr.width]="widthDesk" [attr.height]="heightDesk / 2"
+    rx="5" ry="5"
     fill="#B6B1AE"/>
 
     <rect [id]="desk.id" [attr.x]="desk.x"
@@ -38,19 +39,19 @@
 
     <circle [id]="desk.id" [attr.cx]="desk.x + widthDesk * 0.5"
     [attr.cy]="desk.y + heightDesk * 0.65" [attr.r]="20"
-    [attr.visibility]="visibilyty(desk)"
+    [attr.visibility]="desk.employee ? 'visible' : 'hidden'"
     fill="#FFEAD5"/>
 
     <ellipse [id]="desk.id" [attr.cx]="desk.x + widthDesk * 0.5"
     [attr.cy]="desk.y + heightDesk * 0.63"
     [attr.rx]="21" [attr.ry]="12"
-    [attr.visibility]="visibilyty(desk)"
+    [attr.visibility]="desk.employee ? 'visible' : 'hidden'"
     fill="#502900"/>
 
     <ellipse [id]="desk.id" [attr.cx]="desk.x + widthDesk * 0.5"
     [attr.cy]="desk.y + heightDesk * 0.70"
     [attr.rx]="20" [attr.ry]="15"
-    [attr.visibility]="visibilyty(desk)"
+    [attr.visibility]="desk.employee ? 'visible' : 'hidden'"
     fill="#502900"/>
   </g>
 

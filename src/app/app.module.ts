@@ -14,6 +14,7 @@ import { PositionModule } from './positions/position.module';
 import { PositionService } from './positions/services/position.service';
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
+import { RoomAddService } from './rooms/services/room-add.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
     FormsModule
   ],
   providers: [
+    RoomAddService,
     RoomService,
     PositionService,
     DataEmployeeService

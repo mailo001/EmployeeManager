@@ -40,8 +40,11 @@ export class RoomEditComponent implements OnInit {
     const roomCon: Room = {
       nb: this.num,
       name: this.name,
+      weidth: this.roomOld.weidth,
+      height: this.roomOld.height,
       load: this.load,
-      maxLoad: this.maxLoad
+      maxLoad: this.maxLoad,
+      desks: this.roomOld.desks
     };
     this.roomService.edit(this.roomOld, roomCon);
     this.roomOld = this.roomNew;

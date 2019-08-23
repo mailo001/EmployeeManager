@@ -3,6 +3,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
+      <th scope="col">Dimensions</th>
       <th scope="col">Load</th>
       <th scope="col">Max Load</th>
       <th scope="col">Edit</th>
@@ -13,6 +14,7 @@
     <tr *ngFor="let room of roomList">
       <th scope="row">{{ room.nb }}</th>
       <td>{{ room.name }}</td>
+      <td>{{ room.width }} / {{ room.height }}</td>
       <td>{{ room.load }}</td>
       <td>{{ room.maxLoad }}</td>
       <td>
@@ -34,5 +36,5 @@
 </div>
 
 <div>
-  {{err}}
+  <h5>{{err}}</h5>
 </div>

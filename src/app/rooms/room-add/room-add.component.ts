@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoomService } from '../services/room.service';
 import { Room } from '../models/room';
+import { RoomAddService } from '../services/room-add.service';
 
 @Component({
   selector: 'app-room-add',
@@ -14,31 +15,40 @@ export class RoomAddComponent implements OnInit {
   name = '';
   maxLoad: number;
 
+  width: number;
+  lenght: number;
+
   null: number;
 
   constructor(
     private router: Router,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private rommAddService: RoomAddService
   ) { }
 
   ngOnInit() {
   }
 
-  add() {
+  next() {
     const room: Room = {
       nb: this.num,
       name:  this.name,
+      width: this.width,
+      height: this.lenght,
       load: 0,
-      maxLoad: this.maxLoad
+      maxLoad: this.maxLoad,
+      desks: []
     };
 
-    this.roomService.add(room);
+    this.rommAddService.setRoom(room);
 
     this.num = this.null;
     this.name = '';
     this.maxLoad = this.null;
+    this.width = this.null;
+    this.lenght = this.null;
 
-    this.router.navigate(['/rooms/add/create']);
+    this.router.navigate(['/rooms/add/second']);
   }
 
   back() {
