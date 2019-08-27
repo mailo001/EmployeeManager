@@ -5,11 +5,13 @@ import { RoomAddComponent } from './room-add/room-add.component';
 import { RoomEditComponent } from './room-edit/room-edit.component';
 import { RoomCreateComponent } from './room-create/room-create.component';
 import { RoomAddSecondComponent } from './room-add-second/room-add-second.component';
+import { RoomViewComponent } from './room-view/room-view.component';
 
 
 const routes: Routes = [
   { path: 'rooms', component: RoomListComponent },
   { path: 'room/:nb', component: RoomEditComponent },
+  { path: 'room/view/:nb', component: RoomViewComponent },
   { path: 'rooms/add', component: RoomAddComponent },
   { path: 'rooms/add/second', component: RoomAddSecondComponent },
   { path: 'rooms/add/create', component: RoomCreateComponent }

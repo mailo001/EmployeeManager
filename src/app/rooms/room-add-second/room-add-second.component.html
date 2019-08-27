@@ -3,15 +3,15 @@
 </div>
 
 <div class="center">
-    <app-room-create></app-room-create>
-</div>
-
-<div class="center">
-    <button type="button" class="btn btn-primary" (click)="addDesk()">Add Desk</button>
-    <button type="button" class="btn btn-success" (click)="addRoom()">Add Room</button>
-    <button type="button" class="btn btn-danger" (click)="back()">Back</button>
+  <button type="button" class="btn btn-primary" (click)="addDesk()">Add Desk</button>
+  <button type="button" class="btn btn-success" (click)="addRoom()">Add Room</button>
+  <button type="button" class="btn btn-danger" (click)="back()">Back</button>
 </div>
 
 <div class="bad center">
   <h5>{{err}}</h5>
+</div>
+
+<div class="center">
+    <app-room-create [edit]="true" [addEmp]="false"></app-room-create>
 </div>

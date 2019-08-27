@@ -40,7 +40,7 @@ export class RoomEditComponent implements OnInit {
     const roomCon: Room = {
       nb: this.num,
       name: this.name,
-      weidth: this.roomOld.weidth,
+      width: this.roomOld.width,
       height: this.roomOld.height,
       load: this.load,
       maxLoad: this.maxLoad,

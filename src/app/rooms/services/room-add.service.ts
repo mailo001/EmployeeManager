@@ -22,6 +22,7 @@ export class RoomAddService {
 
   uppdateDesks(desks: Array<Desk>) {
     this.room.desks = desks;
+    this.room.load = this.room.desks.filter(d => d.employee === true).length;
     this.roomObs.next(this.room);
   }
 
@@ -31,7 +32,7 @@ export class RoomAddService {
       x: this.room.width / 2 - 10,
       y: this.room.height / 2 - 10,
       rotate: 0,
-      colision: false,
+      colision: true,
       employee: false
     };
     this.room.desks.push(desk);

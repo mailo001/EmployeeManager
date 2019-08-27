@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
-import { Desk, WidthDesk, HeightDesk } from '../models/desk';
-import { RoomAddService } from '../services/room-add.service';
-import { Room } from '../models/room';
+import { Desk, WidthDesk, HeightDesk } from 'src/app/rooms/models/desk';
+import { RoomAddService } from 'src/app/rooms/services/room-add.service';
+import { Room } from 'src/app/rooms/models/room';
 import { Employee } from 'src/app/employees/models/employee';
 
 @Component({

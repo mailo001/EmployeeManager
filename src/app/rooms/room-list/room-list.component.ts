@@ -26,7 +26,7 @@ export class RoomListComponent implements OnInit {
   ngOnInit() { }
 
   roomEdit(room: Room) {
-    this.router.navigate(['/room', room.nb]);
+    this.router.navigate(['/room/view', room.nb]);
   }
 
   roomDelete(room: Room) {

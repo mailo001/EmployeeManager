@@ -59,6 +59,12 @@ export class RoomService {
     this.storage.set(STORAGE_KEY, this.roomList);
   }
 
+  delateByNb(nb: number) {
+    this.roomList = this.roomList.filter(r => r.nb !== nb);
+    this.roomListObs.next(this.roomList);
+    this.storage.set(STORAGE_KEY, this.roomList);
+  }
+
   edit(roomOld: Room, roomNew: Room) {
     this.delate(roomOld);
     this.add(roomNew);

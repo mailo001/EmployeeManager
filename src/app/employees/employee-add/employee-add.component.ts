@@ -6,6 +6,7 @@ import { PositionService } from 'src/app/positions/services/position.service';
 import { Position } from 'src/app/positions/models/position';
 import { Room } from 'src/app/rooms/models/room';
 import { RoomService } from 'src/app/rooms/services/room.service';
+import { AddEmployeeService } from '../services/add-employee.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -32,6 +33,7 @@ export class EmployeeAddComponent implements OnInit {
   constructor(
     private router: Router,
     private empService: DataEmployeeService,
+    private empAddService: AddEmployeeService,
     private positionService: PositionService,
     private roomService: RoomService
   ) {
@@ -62,9 +64,17 @@ export class EmployeeAddComponent implements OnInit {
         salary: this.salary
       };
 
-      this.empService.add(empNew);
+      if (this.empService.checkId(empNew) !== 0) {
+        throw new Error('Wrong Id');
+      }
 
-      this.roomService.addEmpToRoom(this.room);
+      // this.empService.add(empNew);
+
+      // this.roomService.addEmpToRoom(this.room);
+
+      this.empAddService.setEmp(empNew);
+
+      this.router.navigate(['/employees/add/second']);
 
       this.id = this.empService.getFreeId();
       this.firstName = '';

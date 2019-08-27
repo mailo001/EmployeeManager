@@ -15,6 +15,7 @@ import { PositionService } from './positions/services/position.service';
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { RoomAddService } from './rooms/services/room-add.service';
+import { AddEmployeeService } from './employees/services/add-employee.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RoomAddService } from './rooms/services/room-add.service';
     RoomAddService,
     RoomService,
     PositionService,
+    AddEmployeeService,
     DataEmployeeService
   ],
   bootstrap: [AppComponent]
