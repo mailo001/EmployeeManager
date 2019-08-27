@@ -31,7 +31,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   empDelete(emp: Employee) {
-    this.roomService.delateEmpOfRoom(emp.room);
+    this.roomService.delateEmpOfRoom(emp.room, emp.id);
     this.empService.delate(emp);
   }
 

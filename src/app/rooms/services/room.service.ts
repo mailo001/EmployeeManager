@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Room } from '../models/room';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Desk } from '../models/desk';
 
 const STORAGE_KEY = 'local_room';
 
@@ -81,10 +82,18 @@ export class RoomService {
     this.storage.set(STORAGE_KEY, this.roomList);
   }
 
-  delateEmpOfRoom(num: number) {
+  delateEmpOfRoom(num: number, id: number) {
     const room: Room = this.getRoom(num);
     this.delate(room);
     room.load -= 1;
+    room.desks.forEach((d: Desk) => {
+      if (d.employee === true) {
+        if (d.empId === id) {
+          d.employee = false;
+          d.empId = null;
+        }
+      }
+    });
     this.add(room);
     this.roomListObs.next(this.roomList);
     this.storage.set(STORAGE_KEY, this.roomList);
