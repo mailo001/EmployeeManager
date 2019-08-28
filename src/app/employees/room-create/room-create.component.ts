@@ -86,8 +86,8 @@ export class RoomCreateComponent implements OnInit {
     }
   }
 
-  addEmployee(id: number) {
-    if (this.addEmp === true) {
+  addEmployee(id: number, d: Desk) {
+    if (this.addEmp === true && d.employee === false) {
       this.desks.forEach((desk: Desk) => {
         if (desk.id === id) {
           desk.employee = true;

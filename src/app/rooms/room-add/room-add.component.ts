@@ -20,6 +20,8 @@ export class RoomAddComponent implements OnInit {
 
   null: number;
 
+  err = '';
+
   constructor(
     private router: Router,
     private roomService: RoomService,
@@ -30,25 +32,34 @@ export class RoomAddComponent implements OnInit {
   }
 
   next() {
-    const room: Room = {
-      nb: this.num,
-      name:  this.name,
-      width: this.width,
-      height: this.lenght,
-      load: 0,
-      maxLoad: this.maxLoad,
-      desks: []
-    };
+    try {
+      if (this.roomService.checkNb(this.num) > 0) {
+        throw new Error('Wrong number!');
+      }
 
-    this.rommAddService.setRoom(room);
+      const room: Room = {
+        nb: this.num,
+        name: this.name,
+        width: this.width,
+        height: this.lenght,
+        load: 0,
+        maxLoad: this.maxLoad,
+        desks: []
+      };
 
-    this.num = this.null;
-    this.name = '';
-    this.maxLoad = this.null;
-    this.width = this.null;
-    this.lenght = this.null;
+      this.rommAddService.setRoom(room);
 
-    this.router.navigate(['/rooms/add/second']);
+      this.num = this.null;
+      this.name = '';
+      this.maxLoad = this.null;
+      this.width = this.null;
+      this.lenght = this.null;
+
+      this.router.navigate(['/rooms/add/second']);
+    } catch (e) {
+      this.err = e;
+    }
+
   }
 
   back() {
@@ -56,3 +67,4 @@ export class RoomAddComponent implements OnInit {
   }
 
 }
+

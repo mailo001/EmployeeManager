@@ -82,7 +82,7 @@ export class EmployeeDetailComponent implements OnInit {
 
       this.empService.edit(this.empOld, empCon);
 
-      this.roomService.delateEmpOfRoom(this.empOld.room);
+      this.roomService.delateEmpOfRoom(this.empOld.room, empCon.id);
       this.roomService.addEmpToRoom(this.room);
 
       this.empOld = this.empNew;

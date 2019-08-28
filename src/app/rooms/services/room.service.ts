@@ -54,6 +54,10 @@ export class RoomService {
     this.storage.set(STORAGE_KEY, this.roomList);
   }
 
+  checkNb(nb: number): number {
+    return this.roomList.filter(r => r.nb === nb).length;
+  }
+
   delate(room: Room) {
     this.roomList = this.roomList.filter(r => r !== room);
     this.roomListObs.next(this.roomList);

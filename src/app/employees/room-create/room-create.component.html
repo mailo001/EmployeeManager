@@ -7,7 +7,7 @@
 
   <g *ngFor="let desk of desks" (mousedown)="clik($event, desk.id)"
   (mousemove)="move($event)" (mouseup)="unclick($event)"
-  (dblclick)="addEmployee(desk.id)"
+  (dblclick)="addEmployee(desk.id, desk)"
   [attr.transform]="'rotate(' + desk.rotate.toString()
   + ',' + (desk.x + widthDesk / 2).toString()
   + ',' + (desk.y + heightDesk / 2).toString() + ')'">
